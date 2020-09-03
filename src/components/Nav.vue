@@ -1,9 +1,9 @@
 <template>
-  <div class="nav">
-    <router-link to="/money"><Icon name="money"/>记账</router-link>|
-    <router-link to="/labels"><Icon name="labels"/>标签</router-link>|
-    <router-link to="/statistics"><Icon name="statistics"/>统计</router-link>
-  </div>
+  <nav>
+    <router-link to="/labels" class="item" active-class="selected" ><Icon  name="labels"/>标签</router-link>
+    <router-link to="/money" class="item" active-class="selected"><Icon name="money"/>记账</router-link>
+    <router-link to="/statistics" class="item" active-class="selected"><Icon name="statistics"/>统计</router-link>
+  </nav>
 </template>
 
 <script lang="ts">
@@ -20,9 +20,20 @@ name: "Nav.vue"
 </script>
 
 <style lang="scss" scoped>
-.nav{
+nav{
   display: flex;
+  box-shadow: 0 0 3px rgba(0,0,0,0.25);
   justify-content:space-around;
-  border:1px solid red;
+  > .item{
+    width: 33.33333%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top:5px;
+     &.selected{
+      color:red;
+    }
+  }
 }
 </style>

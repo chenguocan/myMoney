@@ -19,7 +19,6 @@ name: "Layout"
 .nav-wrapper {
   height: 100vh;
   width: 100vw;
-  border: 1px solid green;
   display: flex;
   flex-direction: column;
 
