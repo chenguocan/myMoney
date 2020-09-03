@@ -2,14 +2,9 @@
   <div id="app">
     <div id="nav">
       <router-view/>
-      <router-link to="/Labels">标签</router-link>|
-      <router-link to="/Money">记账</router-link>|
-      <router-link to="/statistics">统计</router-link>
     </div>
-
   </div>
 </template>
-
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
