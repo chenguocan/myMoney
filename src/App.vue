@@ -6,5 +6,5 @@
   </div>
 </template>
 <style lang="scss">
-@import "~@/assets/styles/style.css";
+@import "~@/assets/styles/style.scss";
 </style>
