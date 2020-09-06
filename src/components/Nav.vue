@@ -20,9 +20,10 @@ name: "Nav.vue"
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/styles/style.scss";
 nav{
   display: flex;
-  box-shadow: 0 0 3px rgba(0,0,0,0.25);
+  @extend %outerShadow;
   justify-content:space-around;
   > .item{
     width: 33.33333%;
