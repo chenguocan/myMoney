@@ -1,9 +1,9 @@
 <template>
   <div class="numberPad">
-    <div class="output">100</div>
+    <div class="output">{{money}}</div>
     <div class="buttons clearfix">
       <button>1</button>
-      <button>2</button>
+      <button >2</button>
       <button>3</button>
       <button>删除</button>
       <button>4</button>
@@ -22,7 +22,19 @@
 
 <script lang="ts">
 export default {
-  name: 'NumberPad'
+  name: 'NumberPad',
+  data(){
+    return {
+      money: 100,
+    }
+  },
+  methods:{
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    MoneyType(type: any){
+
+    }
+  }
+
 };
 </script>
 
