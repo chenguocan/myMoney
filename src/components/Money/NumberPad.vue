@@ -48,11 +48,10 @@ export default class NumberPad extends Vue {
   }
 
   remove() {
-    console.log(this.output.length);
-   this.output=this.output.slice(0,-1);
-   if(this.output.length===0){
-     this.output="0";
-   }
+    this.output = this.output.slice(0, -1);
+    if (this.output.length === 0) {
+      this.output = '0';
+    }
   }
 
   clear(){

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Layout class-profix="layout">
-      <Tags></Tags>
+      <Tags :data-source.sync="tags"></Tags>
       <Notes></Notes>
       <Types></Types>
       <NumberPad></NumberPad>
@@ -20,6 +20,7 @@ export default {
   components: {Tags,Types,Notes,NumberPad},
   data() {
     return {
+      tags:['衣','食','住','行'],
     }
   },
 }
