@@ -1,8 +1,8 @@
 <template>
   <div>
     <ul class="types">
-      <li :class="type==='-' ? 'selected' : 'false'" @click="selectType('-')">支出</li>
-      <li :class="type==='+' ? 'selected' : 'false  '" @click="selectType('+')">收入</li>
+      <li :class="dataType==='-' ? 'selected' : 'false'"  @click="selectType('-')">支出</li>
+      <li :class="dataType==='+' ? 'selected' : 'false  '" @click="selectType('+')">收入</li>
     </ul>
   </div>
 </template>
@@ -13,12 +13,14 @@ import {Component,Prop} from 'vue-property-decorator';
 
 @Component
 export default class Types extends Vue {
-  type = '-'; //"-"为支出,"+"为收入
+  @Prop(String) dataType!: string;
+  type = this.dataType; //"-"为支出,"+"为收入
   selectType(type: string) {
     if (type !== '-' && type !== '+') {
       throw new Error('');
     }
-    this.type = type;
+    console.log(this.type);
+    this.$emit("update:dataType",type);
   }
 }
 /*export default {

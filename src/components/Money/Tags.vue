@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Prop} from 'vue-property-decorator';
+import {Component, Prop,Watch} from 'vue-property-decorator';
 
 @Component
 export default class Tags extends Vue {
@@ -34,6 +34,11 @@ export default class Tags extends Vue {
       console.log(name);
       this.$emit('update:dataSource', [...this.dataSource,name]);
     }
+  }
+
+  @Watch("selectedTag")
+  onTagChange(value: string[]){
+    this.$emit("update:tag",this.selectedTag);
   }
 
 }
