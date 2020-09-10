@@ -19,7 +19,6 @@ export default class Types extends Vue {
     if (type !== '-' && type !== '+') {
       throw new Error('');
     }
-    console.log(this.type);
     this.$emit("update:dataType",type);
   }
 }
