@@ -21,7 +21,7 @@ tagsListModel.fetch();
   components: {Button}
 })
 export default class Labels extends Vue{
-      tags=tagsListModel.data;
+      tags=window.tagList;
       createNewTag(){
         const name=window.prompt("请输入标签名");
         if(name){
@@ -43,6 +43,7 @@ export default class Labels extends Vue{
   font-size: 18px;
   padding-left: 16px;
   padding-right: 16px;
+  background:white;
   >.tag{
     border-bottom: 1px solid #e6e6e6;
     min-height: 44px;

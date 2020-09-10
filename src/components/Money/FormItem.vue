@@ -2,22 +2,22 @@
   <div>
     <label class="notes">
       <span class="name">{{noteName}}</span>
-      <input type="text" v-model="value" @input="onValueChange" :placeholder="placeholder"/>
+      <input type="text" :value="value"  @input="onValueChange($event.target.value)" :placeholder="placeholder"/>
     </label>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Watch,Prop} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class Notes extends Vue {
-  value = '';
+  @Prop({default:""}) readonly value?: string;
   @Prop({required: true}) noteName!: string;
   @Prop({default:""}) placeholder?: string;
-  onValueChange(){
-    this.$emit("update:value",this.value);
+  onValueChange(value: string){
+    this.$emit("update:value",value);
   }
 }
 </script>

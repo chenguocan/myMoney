@@ -2,15 +2,15 @@
   <div>
     <Layout>
       <div class="navBar">
-        <Icon  name="left" class="left"></Icon>
+        <Icon @click="goBack"  name="left" class="left"></Icon>
         <span>标签页</span>
         <div class="right"></div>
       </div>
       <div class="form-wrapper">
-       <FormItem note-name="标签" placeholder="请输入标签名" ></FormItem>
+       <FormItem note-name="标签" placeholder="请输入标签名" @update:value="changeValue" :value="tag.name" ></FormItem>
       </div>
       <div class="button-wrapper">
-         <Button>删除标签</Button>
+         <Button @click="remove(tag.id)">删除标签</Button>
       </div>
     </Layout>
   </div>
@@ -18,25 +18,42 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component,Prop} from 'vue-property-decorator';
 import tagsListModel from '@/Models/tagsListModel';
 import FormItem from '@/components/Money/FormItem.vue';
 import Button from "@/components/Button.vue";
+
 @Component({
   components: {FormItem,Button}
 })
 export default class Edit extends Vue {
-
-
+  tag?: { id: string ;  name: string } = undefined;
   created() {
     const tagList = tagsListModel.fetch();
     const id = this.$route.params.id;
     const tag = tagList.filter(item => item.id === id)[0];
     if (tag) {
-      console.log(id);
+      this.tag=tag;
     } else {
       this.$router.replace('/404');
     }
+  }
+  changeValue(name: string){
+    if(this.tag){
+      tagsListModel.update(this.tag.id,name);
+    }
+  }
+  remove(id: string){
+    const status: boolean=tagsListModel.remove(id);
+    if(status===true){
+      window.alert("删除成功");
+      this.$router.back();
+    }else if(status===false){
+      window.alert("删除失败");
+    }
+  }
+  goBack(){
+    this.$router.back();
   }
 }
 </script>

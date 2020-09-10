@@ -27,7 +27,7 @@ const tagList=tagsListModel.fetch();
   components: {Tags, Types, FormItem, NumberPad},
 })
 export default class Money extends Vue {
-  tags = tagList.map(item => item.name);
+  tags = window.tagList;
   record: RecordItem = {
     amount:0,
     type:"-",
@@ -50,15 +50,12 @@ export default class Money extends Vue {
   onUpdateType(value: string) {
     this.record.type = value;
   }
-  onSubmit(value: number){
-    this.record.createAt=new Date();
-    const record2=recordListModel.clone(this.record);
-    this.recordList.push(record2);
+  onSubmit(){
+    recordListModel.create(this.record);
   }
   @Watch("recordList")
   onRecordListChange(){
-    console.log("12312");
-    recordListModel.save(this.recordList);
+    recordListModel.save();
   }
 /*  createDate(){
     const date: Date=new Date();
