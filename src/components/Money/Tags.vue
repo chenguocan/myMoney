@@ -12,7 +12,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop,Watch} from 'vue-property-decorator';
-import tagsListModel from '@/Models/tagsListModel';
 
 @Component
 export default class Tags extends Vue {
@@ -28,23 +27,12 @@ export default class Tags extends Vue {
   }
 
   create() {
-    const name = window.prompt('请输入标签');
-    if(name!==null){
-      const message= tagsListModel.create(name);
-      if(message==="duplicate"){
-        window.alert("标签名重复");
-      }else if(message==="ok"){
-        window.alert("创建标签成功");
-      }
+    const name=window.prompt("请输入标签名");
+    if(name){
+      window.createNewTag(name);
     }else{
-      window.alert("标签名为空");
+      window.alert("请输入正确标签");
     }
- /*   const name = window.prompt('请输入标签');
-    if (name === '') {
-      window.alert('标签不能为空字符串');
-    } else if (this.dataSource) {
-      this.$emit('update:dataSource', [...this.dataSource,name]);
-    }*/
   }
 
   @Watch("selectedTag")

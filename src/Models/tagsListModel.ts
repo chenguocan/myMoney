@@ -13,7 +13,7 @@ const tagsListModel: tagsListItem={
         const newId=createId().toString();
         const names=this.data.map(item=> item.name);
         if(names.indexOf(name)>=0){
-            return "duplicate";
+            return "duplicated";
         }
         this.data.push({id:newId,name:name});
         this.save();

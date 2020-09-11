@@ -22,26 +22,6 @@ export default class Types extends Vue {
     this.$emit("update:dataType",type);
   }
 }
-/*export default {
-  name: 'Types',
-  props:['xxx'],
-  data(){
-    return {
-      type: "-" //"-"为支出,"+"为收入
-    }
-  },
-  methods:{
-    selectType(type: string){
-      if(type!=="-" && type!=="+"){
-        throw new Error ("")
-      }
-      this.type=type;
-    }
-  },
-  mounted() {
-    console.log(this.xxx);
-  }
-};*/
 </script>
 
 <style lang="scss" scoped>

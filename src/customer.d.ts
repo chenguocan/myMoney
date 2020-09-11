@@ -12,7 +12,7 @@ type Tag={
 type tagsListItem={
     data: Tag[];
     fetch: () => Tag[];
-    create: (name: string) => "ok"|"duplicate";
+    create: (name: string) => "ok"|"duplicated";
     update: (id: string,name: string) => "success"|"duplicated"|"error";
     remove: (id: string) => boolean;
     save: () => void;
@@ -20,4 +20,8 @@ type tagsListItem={
 
 interface Window{
     tagList: Tag[];
+    removeTag: (id: string) => boolean;
+    createTag: (id: string) => Tag;
+    updateTag: (id: string,name: string) => void;
+    createNewTag: (name: string) => "ok"|"duplicated"|undefined;
 }
