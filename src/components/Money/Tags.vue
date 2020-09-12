@@ -12,7 +12,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop,Watch} from 'vue-property-decorator';
-
+import store from "@/store/tagsStore.ts"
 @Component
 export default class Tags extends Vue {
   @Prop(Array) readonly dataSource: string[] | undefined;
@@ -29,14 +29,14 @@ export default class Tags extends Vue {
   create() {
     const name=window.prompt("请输入标签名");
     if(name){
-      window.createNewTag(name);
+      store.createNewTag(name);
     }else{
       window.alert("请输入正确标签");
     }
   }
 
   @Watch("selectedTag")
-  onTagChange(value: string[]){
+  onTagChange(){
     this.$emit("update:tag",this.selectedTag);
   }
 

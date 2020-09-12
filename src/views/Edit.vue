@@ -21,14 +21,14 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import FormItem from '@/components/Money/FormItem.vue';
 import Button from "@/components/Button.vue";
-
+import store from "@/store/tagsStore"
 @Component({
   components: {FormItem,Button}
 })
 export default class Edit extends Vue {
   tag?: { id: string ;  name: string } = undefined;
   created() {
-    const tag=window.createTag(this.$route.params.id);
+    const tag=store.createTag(this.$route.params.id);
     if (tag) {
       this.tag=tag;
     } else {
@@ -37,11 +37,11 @@ export default class Edit extends Vue {
   }
   changeValue(name: string){
     if(this.tag){
-      window.updateTag(this.tag.id,name);
+      store.updateTag(this.tag.id,name);
     }
   }
   remove(id: string){
-    const status: boolean=window.removeTag(id);
+    const status: boolean=store.removeTag(id);
     if(status===true){
       this.$router.back();
     }

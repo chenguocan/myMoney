@@ -17,11 +17,14 @@ type tagsListItem={
     remove: (id: string) => boolean;
     save: () => void;
 }
+/*
 
 interface Window{
-    tagList: Tag[];
+/!*    tagList: Tag[];
     removeTag: (id: string) => boolean;
     createTag: (id: string) => Tag;
     updateTag: (id: string,name: string) => void;
     createNewTag: (name: string) => "ok"|"duplicated"|undefined;
-}
+    recordList: RecordItem[];
+    createRecord:(record: RecordItem)=>void;*!/
+}*/

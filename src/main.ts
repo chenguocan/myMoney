@@ -1,29 +1,32 @@
-import Vue from 'vue'
-import App from './App.vue'
-import './registerServiceWorker'
-import router from './router'
-import store from './store'
+import Vue from 'vue';
+import App from './App.vue';
+import './registerServiceWorker';
+import router from './router';
+import store from './store';
 import Nav from '@/components/Nav.vue';
 import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
-import Notes from "@/components/Money/FormItem.vue"
-import recordListModel from '@/Models/recordListModel';
-import tagsListModel from '@/Models/tagsListModel';
+import Notes from '@/components/Money/FormItem.vue';
+
 Vue.config.productionTip = false
 Vue.component("Nav",Nav)
 Vue.component("Icon",Icon)
 Vue.component("Layout",Layout);
 Vue.component("Notes",Notes);
-
+/*//record store
+window.recordList=recordListModel.fetch();
+window.createRecord=(record: RecordItem)=>{
+  recordListModel.create(record);
+};
+//tags store
 window.tagList=tagsListModel.fetch();
 window.createTag=(id: string)=>{
-  const tag = window.tagList.filter(item => item.id === id)[0];
-  return tag;
+  return window.tagList.filter(item => item.id === id)[0];
 }
 
 window.removeTag=(id: string)=>{
   const status: boolean=tagsListModel.remove(id);
-  if(status===true){
+  if(status){
     window.alert("删除成功");
     return true;
   }else {
@@ -47,7 +50,7 @@ window.createNewTag=(name: string)=>{
       return undefined;
     }
   }
-}
+}*/
 new Vue({
   router,
   store,

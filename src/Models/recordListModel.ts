@@ -8,10 +8,10 @@ const recordListModel={
     create(record: RecordItem){
         record.createAt=new Date();
         const record2=clone(record);
-        this.data.push();
+        this.data.push(record2);
+        this.save();
     },
     save(){
-        console.log(this.data);
         window.localStorage.setItem(storageNameKey,JSON.stringify(this.data));
     }
 }
