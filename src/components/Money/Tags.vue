@@ -29,7 +29,7 @@ export default class Tags extends Vue {
   create() {
     const name=window.prompt("请输入标签名");
     if(name){
-      store.createNewTag(name);
+      store.createTag(name);
     }else{
       window.alert("请输入正确标签");
     }

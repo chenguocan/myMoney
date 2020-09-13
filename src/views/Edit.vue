@@ -28,7 +28,7 @@ import store from "@/store/tagsStore"
 export default class Edit extends Vue {
   tag?: { id: string ;  name: string } = undefined;
   created() {
-    const tag=store.createTag(this.$route.params.id);
+    const tag=store.findTag(this.$route.params.id);
     if (tag) {
       this.tag=tag;
     } else {
@@ -42,7 +42,7 @@ export default class Edit extends Vue {
   }
   remove(id: string){
     const status: boolean=store.removeTag(id);
-    if(status===true){
+    if(status){
       this.$router.back();
     }
   }
