@@ -1,21 +1,25 @@
 <template>
   <div class="tags">
     <ul class="current">
-      <li v-for="tag in dataSource" :key="tag.id" @click="toggle(tag)" :class="{selected:selectedTag.indexOf(tag)>=0}" >{{ tag.name }}</li>
+      <li v-for="tag in tagList" :key="tag.id" @click="toggle(tag)" :class="{selected:selectedTag.indexOf(tag)>=0}" >{{ tag.name }}</li>
     </ul>
     <div class="new">
-      <button @click="create">新增标签</button>
+      <button @click="createTag">新增标签</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {Component, Prop,Watch} from 'vue-property-decorator';
-import store from "@/store/tagsStore.ts"
+import {Component} from 'vue-property-decorator';
+import store from "@/store"
+import {mixins} from 'vue-class-component';
+import tagHelper from '@/mixins/tagHelper';
 @Component
-export default class Tags extends Vue {
-  @Prop(Array) readonly dataSource: string[] | undefined;
+export default class Tags extends mixins(tagHelper) {
+  //tagList=store.fetchTags();
+  get tagList(){
+    return store.state.tagList;
+  }
   selectedTag: string[]=[] ;
   toggle(tag: string){
     const index=this.selectedTag.indexOf(tag);
@@ -24,22 +28,12 @@ export default class Tags extends Vue {
     }else{
       this.selectedTag.push(tag);
     }
+
   }
 
-  create() {
-    const name=window.prompt("请输入标签名");
-    if(name){
-      store.createTag(name);
-    }else{
-      window.alert("请输入正确标签");
-    }
+  created(){
+    store.commit("fetchTags");
   }
-
-  @Watch("selectedTag")
-  onTagChange(){
-    this.$emit("update:tag",this.selectedTag);
-  }
-
 }
 </script>
 

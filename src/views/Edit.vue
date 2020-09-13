@@ -7,10 +7,10 @@
         <div class="right"></div>
       </div>
       <div class="form-wrapper">
-       <FormItem note-name="标签" placeholder="请输入标签名" @update:value="changeValue" :value="tag.name" ></FormItem>
+       <FormItem note-name="标签" placeholder="请输入标签名" @update:value="changeValue" :value="currentTag.name" ></FormItem>
       </div>
       <div class="button-wrapper">
-         <Button @click="remove(tag.id)">删除标签</Button>
+         <Button @click="remove">删除标签</Button>
       </div>
     </Layout>
   </div>
@@ -21,29 +21,32 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import FormItem from '@/components/Money/FormItem.vue';
 import Button from "@/components/Button.vue";
-import store from "@/store/tagsStore"
 @Component({
   components: {FormItem,Button}
 })
 export default class Edit extends Vue {
-  tag?: { id: string ;  name: string } = undefined;
+
+  get currentTag(){
+    return this.$store.state.currentTag;
+  }
+
   created() {
-    const tag=store.findTag(this.$route.params.id);
-    if (tag) {
-      this.tag=tag;
+    this.$store.commit("fetchTags");
+    this.$store.commit("findTag",this.$route.params.id);
+    if (this.currentTag) {
+      this.tag=this.$store.state.currentTag;
     } else {
       this.$router.replace('/404');
     }
   }
   changeValue(name: string){
-    if(this.tag){
-      store.updateTag(this.tag.id,name);
+    if(this.currentTag){
+      this.$store.commit("updateTag",{id:this.currentTag.id,name:name});
     }
   }
-  remove(id: string){
-    const status: boolean=store.removeTag(id);
-    if(status){
-      this.$router.back();
+  remove(){
+    if(this.currentTag) {
+      this.$store.commit("removeTag", this.currentTag.id);
     }
   }
   goBack(){

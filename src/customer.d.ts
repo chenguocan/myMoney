@@ -9,14 +9,14 @@ type Tag={
     id: string;
     name: string;
 }
-type tagsListItem={
+/*type tagsListItem={
     data: Tag[];
     fetch: () => Tag[];
     create: (name: string) => "ok"|"duplicated";
     update: (id: string,name: string) => "success"|"duplicated"|"error";
     remove: (id: string) => boolean;
     save: () => void;
-}
+}*/
 /*
 
 interface Window{

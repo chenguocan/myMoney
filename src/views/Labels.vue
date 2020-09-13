@@ -2,34 +2,33 @@
   <div class="nav-wrapper">
     <Layout>
       <ol class="tags">
-        <router-link :to="`/labels/edit/${tag.id}`" class="tag" v-for="tag in tags" :key="tag.id"><span>{{tag.name}}</span><Icon class="rightTag" name="right"></Icon></router-link>
+        <router-link :to="`/labels/edit/${tag.id}`" class="tag" v-for="tag in tags" :key="tag.id"><span>{{tag.name}}</span>
+          <Icon class="rightTag" name="right"></Icon></router-link>
       </ol>
       <div class="createTag-wrapper">
-        <Button class="createTag" @click="createNewTag">新增标签</Button>
+        <Button class="createTag" @click="createTag">新增标签</Button>
       </div>
     </Layout>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue"
+
 import {Component} from 'vue-property-decorator';
 import Button from '@/components/Button.vue';
-import store from "@/store/tagsStore"
+import {mixins} from 'vue-class-component';
+import tagHelper from "@/mixins/tagHelper.ts"
+
 @Component({
-  components: {Button}
+  components: {Button},
 })
-export default class Labels extends Vue{
-      //tags=window.tagList;
-      tags=store.tagList;
-      createNewTag(){
-        const name=window.prompt("请输入标签名");
-        if(name){
-          store.createTag(name);
-        }else{
-          window.alert("请输入正确标签");
-        }
-      }
+export default class Labels extends mixins(tagHelper){
+  get tags() {
+    return this.$store.state.tagList;
+  }
+  beforeCreate() {
+    this.$store.commit('fetchTags');
+  }
 }
 </script>
 
