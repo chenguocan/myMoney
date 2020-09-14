@@ -26,7 +26,7 @@ export default class Labels extends mixins(tagHelper){
   get tags() {
     return this.$store.state.tagList;
   }
-  beforeCreate() {
+  created() {
     this.$store.commit('fetchTags');
   }
 }

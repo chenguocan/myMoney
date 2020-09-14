@@ -21,6 +21,7 @@ export default class Tags extends mixins(tagHelper) {
     return store.state.tagList;
   }
   selectedTag: string[]=[] ;
+
   toggle(tag: string){
     const index=this.selectedTag.indexOf(tag);
     if(index>=0){
@@ -28,7 +29,7 @@ export default class Tags extends mixins(tagHelper) {
     }else{
       this.selectedTag.push(tag);
     }
-
+    this.$emit("update:selectedTag",this.selectedTag);
   }
 
   created(){

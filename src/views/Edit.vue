@@ -33,11 +33,10 @@ export default class Edit extends Vue {
   created() {
     this.$store.commit("fetchTags");
     this.$store.commit("findTag",this.$route.params.id);
-    if (this.currentTag) {
-      this.tag=this.$store.state.currentTag;
-    } else {
+    if(!this.currentTag) {
       this.$router.replace('/404');
     }
+    
   }
   changeValue(name: string){
     if(this.currentTag){

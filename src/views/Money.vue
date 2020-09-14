@@ -1,7 +1,7 @@
 <template>
   <div>
     <Layout class-profix="layout">
-      <Tags></Tags>
+      <Tags v-on:update:selectedTag="tags=$event"></Tags>
       <div class="notes">
         <FormItem note-name="备注" placeholder="请输入备注" @update:value="onUpdateNotes"></FormItem>
       </div>
@@ -25,11 +25,12 @@ import {Component} from 'vue-property-decorator';
 export default class Money extends Vue {
   //tags=window.tagList;
   //tags = oldStore.tagList;
+  tags=[];
   record: RecordItem = {
     amount: 0,
     type: '-',
     notes: '',
-    tags: [''],
+    tags: [],
   };
 
   get recordList(){
@@ -49,6 +50,7 @@ export default class Money extends Vue {
   }
 
   onSubmit() {
+    this.tags.forEach((item: Tag)=>this.record.tags.push(item.name));
     this.$store.commit("createRecord",this.record);
   }
 
