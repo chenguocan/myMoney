@@ -3,11 +3,16 @@ type RecordItem = {
     type: string;
     notes: string;
     tags: string[];
-    createdAt?: Date;
+    createdAt?: string;
 }
 type Tag={
     id: string;
     name: string;
+}
+type RootState={
+    recordList: RecordItem[];
+    tagList: Tag[];
+    currentTag?: Tag;
 }
 /*type tagsListItem={
     data: Tag[];

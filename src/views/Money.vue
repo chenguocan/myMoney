@@ -5,7 +5,7 @@
       <div class="notes">
         <FormItem note-name="备注" placeholder="请输入备注" @update:value="onUpdateNotes"></FormItem>
       </div>
-      <Types :data-type.sync="record.type"></Types>
+      <Tabs  :date-source="recordType" :type.sync="record.type" ></Tabs>
       <NumberPad @update:Amount="onUpdateAmount" @submit="onSubmit"></NumberPad>
     </Layout>
   </div>
@@ -15,16 +15,18 @@
 import Vue from 'vue';
 
 import Tags from '@/components/Money/Tags.vue';
-import Types from '@/components/Money/Types.vue';
 import FormItem from '@/components/Money/FormItem.vue';
 import NumberPad from '@/components/Money/NumberPad.vue';
 import {Component} from 'vue-property-decorator';
+import Tabs from '@/components/Tabs.vue';
+import recordList from '@/constant/recordList';
 @Component({
-  components: {Tags, Types, FormItem, NumberPad},
+  components: {Tabs, Tags, FormItem, NumberPad},
 })
 export default class Money extends Vue {
   //tags=window.tagList;
   //tags = oldStore.tagList;
+  recordType=recordList;
   tags=[];
   record: RecordItem = {
     amount: 0,
@@ -50,8 +52,8 @@ export default class Money extends Vue {
   }
 
   onSubmit() {
-    this.tags.forEach((item: Tag)=>this.record.tags.push(item.name));
-    this.$store.commit("createRecord",this.record);
+      this.record.tags=this.tags.map((item: Tag)=>item.name);
+      this.$store.commit("createRecord",this.record);
   }
 
   created(){

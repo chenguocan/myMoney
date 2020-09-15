@@ -2,7 +2,7 @@
   <div>
     <ul class="tabs">
       <li v-for="item in dateSource" :key="item.value"
-      :class="profixClass(item)"  @click="changeType(item)">{{item.text}}</li>
+      :class="prefixClass(item)"  @click="changeType(item)">{{item.text}}</li>
     </ul>
   </div>
 </template>
@@ -16,13 +16,13 @@ type dataSourceItem={
 }
 @Component
 export default  class Tabs extends Vue{
-    @Prop(Array) dateSource?: dataSourceItem[];
+    @Prop({required:true,type:Array}) dateSource?: dataSourceItem[];
     @Prop(String) type!: string;
     @Prop(String) classPrefix?: string;
     changeType(item: dataSourceItem){
         this.$emit("update:type",item.value);
     }
-    profixClass(item: dataSourceItem){
+    prefixClass(item: dataSourceItem){
       return {[this.classPrefix + '-tabs-item']:this.classPrefix,selected:this.type===item.value}
     }
 }
