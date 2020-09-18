@@ -6,7 +6,7 @@ type addTagItem={
     action: string;
 }
 @Component
-export class tagHelper extends Vue{
+export default class tagHelper extends Vue{
     async createTag(){
         const name=await MessageBox.prompt('请输入标签名').then((data: addTagItem)=>{
             const name= data.value;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="nav-wrapper">
+    <div class="nav-wrapper" :style="{height:n+'px'}">
       <div class="content" :class="classProfix && `${classProfix}-content`">
         <slot></slot>
       </div>
@@ -9,10 +9,18 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 export default {
   props:["classProfix"],
-  name: "Layout"
+  name: "Layout",
+  data(){
+    return{
+      n:0,
+    }
+  },
+  created(){
+    this.n=document.documentElement.clientHeight;
+  }
 }
 </script>
 

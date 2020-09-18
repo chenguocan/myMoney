@@ -3,7 +3,8 @@
     <Layout>
       <Tabs  :class-prefix="'type'" :date-source="recordType" :type.sync="type"></Tabs>
       <ol>
-        <li v-for="(group,index) in groupList" :key="index">
+        <div v-if="groupList.length===0" class="noMessage">暂无记录</div>
+        <li  v-else v-for="(group,index) in groupList" :key="index">
           <h3 class="title">{{beautify(group.title)}} <span>{{group.total}}</span></h3>
           <ol>
             <li class="record" v-for="item in group.items" :key="item.id">
@@ -76,7 +77,6 @@ export default class Statistics extends Vue {
   type="-";
   dayType="day"
   recordType=recordList;
-
   created(){
    this.$store.commit("fetchRecords");
   }
@@ -84,6 +84,11 @@ export default class Statistics extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.noMessage{
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
 ::v-deep .type-tabs-item {
   background: #C4C4C4;
   &.selected {
