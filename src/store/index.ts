@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import clone from '@/lib/clone';
 import createId from '@/lib/createId';
 import router from '@/router';
+import {MessageBox} from "mint-ui";
 
 Vue.use(Vuex)
 const store= new Vuex.Store({
@@ -35,12 +36,12 @@ const store= new Vuex.Store({
     createTag(state,name: string) {
       const names = state.tagList.map(item => item.name);
       if (names.indexOf(name) >= 0) {
-        window.alert('标签名重复了');
+        MessageBox.alert("标签名重复了")
       }
       const id = createId().toString();
       state.tagList.push({id, name: name});
       store.commit("saveTags");
-      window.alert('添加成功');
+      MessageBox.alert("添加成功")
     },
 
     removeTag(state,id: string) {
@@ -56,7 +57,7 @@ const store= new Vuex.Store({
         store.commit("saveTags");
         router.back();
       }else {
-        window.alert("删除标签失败");
+        MessageBox.alert("删除标签失败")
       }
     },
 
@@ -66,14 +67,14 @@ const store= new Vuex.Store({
       if (idList.indexOf(id) >= 0) {
         const names = state.tagList.map(item => item.name);
         if (names.indexOf(name) >= 0) {
-          window.alert("标签存在");
+          MessageBox.alert("标签已存在")
         } else {
           const tag = state.tagList.filter(item => item.id === id)[0];
           tag.name = name;
           store.commit("saveTags");
         }
       } else {
-        window.alert("编辑失败");
+        MessageBox.alert("编辑失败")
       }
     },
     saveTags(state) {

@@ -5,6 +5,11 @@
     </div>
   </div>
 </template>
+<script >
+export default{
+
+}
+</script>
 <style lang="scss">
 @import "~@/assets/styles/reset.scss";
 @import "~@/assets/styles/style.scss";

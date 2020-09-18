@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Layout class-profix="layout">
+    <Layout class-profix="layout" >
       <Tags v-on:update:selectedTag="tags=$event"></Tags>
       <div class="notes">
         <FormItem note-name="备注" placeholder="请输入备注" @update:value="onUpdateNotes"></FormItem>
@@ -59,6 +59,7 @@ export default class Money extends Vue {
   created(){
     this.$store.commit("fetchRecords");
     this.$store.commit("fetchTags");
+
   }
 }
 
